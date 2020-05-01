@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>isotopestudio.backdoor.core</groupId>
-  <artifactId>backdoorcore</artifactId>
-  <version>1.0.0</version>
-  <build>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>isotopestudio.backdoor.core</groupId>
+	<artifactId>backdoorcore</artifactId>
+	<version>1.0.3</version>
+	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -16,19 +18,23 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
 	<distributionManagement>
-	    <repository>
-	        <id>central</id>
-	        <name>vps819876-releases</name>
-	        <url>http://isotope-studio.fr:8081/artifactory/libs-release</url>
-	    </repository>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/BDoryan/IsotopeStudioRepository</url>
+		</repository>
 	</distributionManagement>
-
+	
 	<repositories>
 		<repository>
-			<id>central</id>
-			<url>http://isotope-studio.fr:8081/artifactory/libs-release</url>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/BDoryan/IsotopeStudioRepository</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 
@@ -36,7 +42,7 @@
 		<dependency>
 			<groupId>doryanbessiere.isotopestudio.api</groupId>
 			<artifactId>isotopestudioapi</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.9</version>
 		</dependency>
 	</dependencies>
 </project>
