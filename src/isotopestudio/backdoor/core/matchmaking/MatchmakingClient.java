@@ -13,25 +13,56 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 
+import doryanbessiere.isotopestudio.api.IsotopeStudioAPI;
 import doryanbessiere.isotopestudio.commons.messaging.Message;
 
-public class MatchmakingClient {
+public abstract class MatchmakingClient {
 
-	/**
-	 *
-	 * @param email
-	 * @param token
-	 * @return returned the connection status, if return null the socket cannot be
-	 *         connected
-	 */
-	public static String connect(String email, String token) {
+	private String email;
+	private String token;
+	private String version;
+
+	public MatchmakingClient(String email, String token, String version) {
+		this.email = email;
+		this.token = token;
+		this.version = version;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
+	}
+
+	public abstract void error(HashMap<String, String> message);
+	public abstract void redirect(String adress, int port);
+	
+	public void connect(){
 		boolean running = true;
 		try {
-			Socket socket = new Socket("localhost", 2424);
+			Socket socket = new Socket(IsotopeStudioAPI.BACKDOOR_MATCHMAKING_SERVER, 2424);
 			DataOutputStream writer = new DataOutputStream(socket.getOutputStream());
 			DataInputStream reader = new DataInputStream(socket.getInputStream());
 
-			String authentication = Message.write("email", email, "token", token) + "\n";
+			String authentication = Message.write("email", email, "token", token, "version", version) + "\n";
 			writer.writeBytes(authentication+"\n");
 			writer.flush();
 			
@@ -41,14 +72,14 @@ public class MatchmakingClient {
 				if (message.containsKey("authenticate")) {
 					Boolean authenticate = Boolean.valueOf(message.get("authenticate"));
 					if (!authenticate) {
-						return "authentication_failed";
+						error(message);
 					}
 				} else if (message.containsKey("kick")) {
 					running = false;
-					return message.get("kick");
+					error(message);
 				} else if (message.containsKey("connection")) {
 					running = false;
-					return "connection=" + socket.getInetAddress().getHostAddress() + ":" + message.get("connection");
+					redirect(socket.getInetAddress().getHostAddress(), Integer.valueOf(message.get("connection")));
 				}
 			}
 			socket.close();
@@ -61,6 +92,5 @@ public class MatchmakingClient {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
 }

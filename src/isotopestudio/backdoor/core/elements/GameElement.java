@@ -33,7 +33,11 @@ public class GameElement {
 
 	private HashMap<Team, Integer> points = new HashMap<Team, Integer>();
 	private ArrayList<Team> team_connected = new ArrayList<Team>();
-	private int max_points = 1;
+	
+	private int max_points = 10;
+
+	private int firewall = 0;
+	private int firewall_max = 20;
 
 	private boolean linked = false;
 
@@ -54,9 +58,8 @@ public class GameElement {
 		for (Team team_ : Team.values()) {
 			setTeamPoint(team_, 0);
 		}
-
-		if (type == GameElementType.SERVER) {
-			setTeamPoint(getTeam(), max_points);
+		if (team != null) {
+			setTeamPoint(team, max_points);
 		}
 
 		this.country = Country.randomCountry();
@@ -126,6 +129,39 @@ public class GameElement {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
+	
+	private boolean offline = false;
+	
+	/**
+	 * @param offline the offline to set
+	 */
+	public void setOffline(boolean offline) {
+		this.offline = offline;
+	}
+	
+	/**
+	 * @return the offline
+	 */
+	public boolean isOffline() {
+		return offline;
+	}
+	
+	public GameElementStatus getStatus() {
+		if(offline)
+			return GameElementStatus.OFFLINE;
+		if(getTeam() == null) {
+			if(team_connected.size() > 0) {
+				return GameElementStatus.ATTACKED;
+			}
+			return GameElementStatus.NEUTRAL;
+		} else if (getTeam() != null){
+			if(team_connected.contains(getTeam()) && team_connected.size() == 1) {
+				return GameElementStatus.CAPTURED;
+			}
+			return GameElementStatus.CAPTURED;
+		}
+		return null;
+	}
 
 	public void link(GameElement target) {
 		this.links.add(new GameElementLink(this.getUUID().toString(), target.getUUID().toString()));
@@ -154,6 +190,20 @@ public class GameElement {
 
 	public int getConnectPrice() {
 		return 50;
+	}
+	
+	/**
+	 * @return the firewall
+	 */
+	public int getFirewall() {
+		return firewall;
+	}
+	
+	/**
+	 * @return the firewall_max
+	 */
+	public int getFirewallMax() {
+		return firewall_max;
 	}
 
 	public void setPoints(HashMap<Team, Integer> points) {
