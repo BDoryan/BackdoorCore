@@ -40,6 +40,7 @@ public class GameElement {
 	private int firewall_max = 20;
 
 	private boolean linked = false;
+	private boolean protected_ = false;
 
 	public GameElement(GameElementType type, String name, Team team) {
 		this.type = type;
@@ -68,6 +69,34 @@ public class GameElement {
 			linked = true;
 
 		CACHE.put(getUUID().toString(), this);
+	}
+	
+	/**
+	 * @param protected_ the protected_ to set
+	 */
+	public void setProtected(boolean protected_) {
+		this.protected_ = protected_;
+	}
+	
+	/**
+	 * @return the protected_
+	 */
+	public boolean isProtected() {
+		return protected_;
+	}
+	
+	/**
+	 * @param firewall the firewall to set
+	 */
+	public void setFirewall(int firewall) {
+		this.firewall = firewall;
+	}
+	
+	/**
+	 * @param firewall_max the firewall_max to set
+	 */
+	public void setFirewallMax(int firewall_max) {
+		this.firewall_max = firewall_max;
 	}
 
 	public boolean isTeamConnected(Team team) {

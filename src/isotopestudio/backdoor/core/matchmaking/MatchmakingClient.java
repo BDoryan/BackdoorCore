@@ -1,16 +1,11 @@
 package isotopestudio.backdoor.core.matchmaking;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 
 import doryanbessiere.isotopestudio.api.IsotopeStudioAPI;
