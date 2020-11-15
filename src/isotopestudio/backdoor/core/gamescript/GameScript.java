@@ -4,8 +4,8 @@ import doryanbessiere.isotopestudio.commons.lang.Lang;
 import isotopestudio.backdoor.core.player.Player;
 
 /**
- * @author BESSIERE Doryan
- * @github https://www.github.com/DoryanBessiere/
+ * @author BDoryan
+ * @github https://www.github.com/BDoryan/
  */
 public class GameScript {
 

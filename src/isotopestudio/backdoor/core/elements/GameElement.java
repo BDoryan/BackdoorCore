@@ -34,7 +34,7 @@ public class GameElement {
 	private HashMap<Team, Integer> points = new HashMap<Team, Integer>();
 	private ArrayList<Team> team_connected = new ArrayList<Team>();
 	
-	private int max_points = 10;
+	private int max_points = 300;
 
 	private int firewall = 0;
 	private int firewall_max = 20;
@@ -69,6 +69,13 @@ public class GameElement {
 			linked = true;
 
 		CACHE.put(getUUID().toString(), this);
+	}
+	
+	/**
+	 * @param max_points the max_points to set
+	 */
+	public void setMaxPoints(int max_points) {
+		this.max_points = max_points;
 	}
 	
 	/**
