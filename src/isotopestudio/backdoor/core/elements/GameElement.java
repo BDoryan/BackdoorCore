@@ -34,7 +34,7 @@ public class GameElement {
 	private HashMap<Team, Integer> points = new HashMap<Team, Integer>();
 	private ArrayList<Team> team_connected = new ArrayList<Team>();
 	
-	private int max_points = 300;
+	private int max_points = 20;
 
 	private int firewall = 0;
 	private int firewall_max = 20;

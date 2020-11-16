@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>isotopestudio.backdoor.core</groupId>
 	<artifactId>backdoorcore</artifactId>
-	<version>1.0.34</version>
+	<version>1.0.35</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
